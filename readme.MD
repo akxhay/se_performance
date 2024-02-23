@@ -16,8 +16,8 @@ This project utilizes the Spring Boot framework to create a dashboard that visua
 
 ## Prerequisites
 Before running this application, ensure that you have the following prerequisites installed:
-- Java Development Kit (JDK) 17 or higher
-- Apache Maven
+- Java Development Kit (JDK) 17 or higher - 'https://www.oracle.com/in/java/technologies/downloads/'
+- Apache Maven 'https://maven.apache.org/install.html'
 
 ## Installation
 1. Clone this repository to your local machine using `git clone`.
