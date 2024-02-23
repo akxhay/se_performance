@@ -2,17 +2,13 @@ package com.xharma.se_performance.service.impl;
 
 import com.xharma.se_performance.config.ColumnMappings;
 import com.xharma.se_performance.repository.SePerformanceRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 /**
  * Abstract service providing common functionalities and configurations.
  * Author: Akshay Sharma
  */
-@Service
-@Slf4j
 public class AbstractService {
 
     @Autowired
@@ -41,7 +37,5 @@ public class AbstractService {
 
     @Autowired
     protected ColumnMappings columnMappings;
-
-    // Add additional methods and functionalities as needed
 
 }
