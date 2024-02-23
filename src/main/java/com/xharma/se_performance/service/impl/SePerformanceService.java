@@ -31,6 +31,7 @@ public class SePerformanceService extends AbstractService implements ISePerforma
     @PostConstruct
     @Override
     public void loadCsvDataToDatabase() {
+        log.info("Inside loadCsvDataToDatabase");
         sePerformanceRepository.deleteAll();
         try (CSVReader reader = new CSVReader(new FileReader(csvFilePath))) {
             for (int i = 0; i < skipRows; i++) {
@@ -39,6 +40,7 @@ public class SePerformanceService extends AbstractService implements ISePerforma
             String[] row;
             while ((row = reader.readNext()) != null) {
                 saveSePerformanceFromRow(row);
+
             }
         } catch (IOException | CsvException e) {
             log.error("Error occurred while processing CSV file: {}", e.getMessage());
@@ -90,6 +92,8 @@ public class SePerformanceService extends AbstractService implements ISePerforma
             setMasterData(sePerformance, i + 1, row[i]);
             sePerformance.getData().add(csvColumn);
         }
+        log.info("processing row {}", sePerformance);
+
         sePerformanceRepository.save(sePerformance);
     }
 
