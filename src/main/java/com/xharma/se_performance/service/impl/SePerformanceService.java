@@ -7,6 +7,7 @@ import com.xharma.se_performance.entity.SePerformance;
 import com.xharma.se_performance.service.ISePerformanceService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public class SePerformanceService extends AbstractService implements ISePerforma
     @Override
     public void loadCsvDataToDatabase() {
         sePerformanceRepository.deleteAll();
-        try (CSVReader reader = new CSVReader(new FileReader(csvFilePath))) {
+        try (CSVReader reader = getCsvReader()) {
             for (int i = 0; i < skipRows; i++) {
                 reader.readNext(); // Skip the row
             }
@@ -44,6 +45,16 @@ public class SePerformanceService extends AbstractService implements ISePerforma
             log.error("Error occurred while processing CSV file: {}", e.getMessage());
         }
     }
+
+    private CSVReader getCsvReader() throws IOException {
+        if (!csvFilePath.startsWith("classpath:")) {
+            return new CSVReader(new FileReader(csvFilePath));
+        } else {
+            return new CSVReader(new FileReader(new ClassPathResource(csvFilePath.split("classpath:")[1]).getFile()));
+        }
+    }
+
+
 
     /**
      * Retrieves all SE performance entities from the database.
